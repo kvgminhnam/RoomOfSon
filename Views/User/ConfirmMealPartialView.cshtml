@@ -1,0 +1,63 @@
+﻿@using RoomOfSon.Models.DAO
+
+@model IEnumerable<ConfirmMealDAO>
+
+<h2 class="title-content">Xác nhận bữa ăn</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Date time</th>
+            <th>Description</th>
+            <th>Num of Pe</th>
+            <th>Total Money</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var it in Model)
+        {
+            <tr>
+                <td>@it.datetime</td>
+                <td>@it.description</td>
+                <td>@it.numofpe</td>
+                <td>@it.totalmoney</td>
+                <td>
+                    @if (@it.status == false)
+                    {
+                        <div class="res-Confirmed-Meal"><button class="btn-confirm-meal btn btn-warning btn-xs" style="color:gold;" value="@it.ID">Confirm</button></div>
+                    }
+                    else
+                    {
+                        <button class="btn btn-success btn-xs">Confirmed</button>
+                    }
+                </td>
+            </tr>
+        }
+     
+    </tbody>
+</table>
+<script>
+    $(".btn-confirm-meal").click(function () {
+
+        var idcm = $(this).val();
+        var pr = $(this).parent();
+        $.ajax({
+            type: "POST",
+            data: { a: idcm },
+            url: "@Url.Content("MealConfirm")",
+            success: function (kq) {
+
+                pr.html("<button class=\"btn btn-success btn-xs\">Confirmed</button>");
+                 $.ajax({
+                    type: "POST",
+                    data: {},
+                    url: "@Url.Content("tblInforUserPartialView")",
+                    success: function (xx) {
+
+                        $("#tblInforUser").html(xx);
+                    }
+                });
+            }
+        })
+    });
+</script>

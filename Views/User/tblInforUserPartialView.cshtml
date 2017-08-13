@@ -1,0 +1,25 @@
+﻿@using RoomOfSon.Models.EF
+
+@model IEnumerable<tblUser>
+
+<h2 style="margin-top:50px;">Số dư của các thành viên</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Full name</th>
+            <th>Money</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var it in Model)
+        {
+            <tr>
+                <td>@it.Fullname</td>
+                <td>@it.Money</td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+

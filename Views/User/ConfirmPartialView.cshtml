@@ -1,0 +1,48 @@
+﻿@using RoomOfSon.Models.DAO  
+@model IEnumerable<ConfirmPayment>
+
+<h2 class="title-content">Xác nhận nộp tiền</h2>
+<div style="max-height: 500px;overflow: auto;" >
+    <table class="table table-hover" >
+        <thead>
+            <tr>
+                <th>Recever</th>
+                <th>Money</th>
+                <th>Date time</th>
+                <th>Submiter</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var it in Model)
+            {
+                <tr>
+                    <td>@it.namereceiver</td>
+                    <td>@it.money</td>
+                    <td>@it.datetime</td>
+                    <td>@it.namesubmiter</td>
+                    <td>
+                        @if (@it.status == true)
+                        {
+                            <button class="btn btn-success btn-xs">Confirmed</button>
+                        }
+                        else
+                        {
+                            if (@it.idreceiver != ViewBag.IDActor && @it.idsubmieter != ViewBag.IDActor)
+                            {
+                                <div class="resConfirmed"><button class="btn_confirmpay btn btn-warning btn-xs" style="color:gold;" value="@it.id">Confirm</button></div>
+                            }
+                            else
+                            {
+                                <button class="btn btn-danger btn-xs" style="color:red;" disabled="disabled">Confirm</button>
+                            }
+                        }
+
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

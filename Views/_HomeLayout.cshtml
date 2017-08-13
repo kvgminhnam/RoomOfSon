@@ -1,0 +1,150 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <title>Welcome to Sơn's room</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/fonts/Home/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/fonts/Home/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+   
+    <!-- Fonts -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    @*<link href="~/Content/Site.css" rel="stylesheet" />*@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+    <link href="~/Content/css/Home/animate.css" rel="stylesheet" />
+    <!-- Squad theme CSS -->
+
+    <link href="~/Content/css/Home/style.css" rel="stylesheet">
+
+
+    <link href="~/Content/color/default.css" rel="stylesheet">
+    <script src="~/Content/js/QLBH/jquery.min.js"></script>
+    <style>
+
+
+        /*.container * {
+            font-family: 'Times New Roman';
+        }*/
+        .tbl-max-height {
+            max-height: 800px;
+            overflow:hidden;
+        }
+        .tbl-max-height:hover{
+            
+            overflow-y: auto;
+        }
+        .title-content {
+            padding-top: 50px;
+        }
+        .container{
+            height:auto;
+        }
+    </style>
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="load"></div>
+    </div>
+
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="/Home/Index">
+                    <h1>Sơn's Room</h1>
+
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#intro">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#service">Service</a></li>
+                    <li><a href="/Infor/Index">@ViewBag.Fullname</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" style="padding-bottom: 0px; padding-top: 0px;padding-right: 0px;padding-left: 0px;" data-toggle="dropdown"> <img src="@ViewBag.Avatar" style="width:50px; height:50px;" alt="Avatar" /> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Meal/Index">Bữa ăn</a></li>
+                            <li><a href="/User/Index">Người dùng</a></li>
+                            <li><a href="/AddMember/Index">Thêm thành viên</a></li>
+                            <li><a href="/General/Index">Tổng Quan</a></li>
+                            <li><a href="/Infor/Index">Sửa thông tin</a></li>
+                            <li><a href="/Login/Logout">Đăng xuất</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Section: intro -->
+    <section id="intro" class="intro">
+
+        <div class="slogan">
+            <h2>WELCOME <span style="color:rebeccapurple">@ViewBag.Fullname</span> TO <span class="text_color">Phòng Của Sơn</span> </h2>
+
+        </div>
+        <div class="page-scroll">
+            <a href="#service" class="btn btn-circle">
+                <i class="fa fa-angle-double-down animated"></i>
+            </a>
+        </div>
+    </section>
+    <!-- /Section: intro -->
+    <!-- Section: services -->
+    @RenderBody()
+
+    <!-- /Section: services -->
+    <!-- /Section: contact -->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="wow shake" data-wow-delay="0.4s">
+                        <div class="page-scroll marginbot-30">
+                            <a href="#intro" id="totop" class="btn btn-circle">
+                                <i class="fa fa-angle-double-up animated"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <p>Phòng Của Sơn</p>
+                    <div class="credits">
+                        <p>&copy;Copy right: Nguyễn Hồng Sơn</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core JavaScript Files -->
+    <script src="~/Content/js/Home/jquery.min.js"></script>
+    <script src="~/Content/js/Home/bootstrap.min.js"></script>
+    <script src="~/Content/js/Home/jquery.easing.min.js"></script>
+    <script src="~/Content/js/Home/jquery.scrollTo.js"></script>
+    <script src="~/Content/js/Home/wow.min.js"></script>
+    <script src="~/Content/js/Home/custom.js"></script>
+    
+    
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    
+</body>
+
+</html>

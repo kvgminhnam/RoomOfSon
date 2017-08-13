@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_HomeLayout.cshtml";
+}
+<style>
+     .form-label > div {
+        margin-top: 30px;
+    }
+    .form-input > input {
+        margin-top: 20px;
+    }
+</style>
+<div class="container" style="min-height:800px; padding-top:50px;">
+    <div class="in-container" style="text-align:center; float:left; width:50%; height:auto;">
+        <h2>Thêm thành viên</h2>
+       <form id="form-attr-user">
+           @Html.AntiForgeryToken()
+          <div style="width:100%; background-color:gray;">
+              <div class="form-label" style="height:auto; float:left; font:bold; width:30%; text-align:left;">
+                 <div><label>Username</label></div> 
+                  <div><label>Password</label></div> 
+                  <div><label>Confirm password</label></div> 
+                  <div><label>Full name</label></div> 
+                  <div><label>Link Avatar</label></div> 
+              </div>
+              <div class="form-input" style="width:60%;  height:auto; float:left">
+                  <input name="txt-username" autocomplete="off" type="text" class="form-control" required="" />
+                  <input name="txt-password" autocomplete="off" type="password" class="form-control" required="" />
+                  <input name="txt-retype-password" autocomplete="off" type="password" class="form-control" required="" />
+                  <input name="txt-full-name" autocomplete="off" type="text" class="form-control" required="" />
+                  <input name="txt-avatar" autocomplete="off" type="url" class="form-control" />
+                  <div id="res-add-member" style="color:green; font:bold; font-size:20px;"></div>
+                  <div><img id="loadingimg1" src="~/Content/img/loadinggif.gif" style="display:none; width:40px; height:40px;" /></div>
+                  <input type="button" id="btn-submit-add-member" class="btn btn-info btn-lg" value="Thêm thành viên" />
+              </div>
+          </div>
+        
+           
+       </form>
+    </div>
+    <div class="in-container" id="display-list-user" style="width:50%; height:auto;">
+     
+    </div>
+</div>
+<script>
+    $("#btn-submit-add-member").click(function () {
+        $("#loadingimg1").show();
+        var username = $("input[name=txt-username]").val();
+        var password = $("input[name=txt-password]").val();
+        var repassword = $("input[name=txt-retype-password]").val();
+        var fullname = $("input[name=txt-full-name]").val();
+        var avatar = $("input[name=txt-avatar]").val();
+        $.ajax({
+            method: "POST", url: "@Url.Content("SubmitAddMember")",
+            data: { a: username, b: password, c: repassword, d: fullname, e: avatar },
+            success: function (res) {
+                $("#loadingimg1").hide();
+                $("#res-add-member").html(res);
+            }
+        })
+    })
+</script>

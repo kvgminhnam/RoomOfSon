@@ -1,0 +1,49 @@
+﻿@using RoomOfSon.Models.DAO
+
+@model IEnumerable<MealDetailDAO>
+
+
+
+<div class="table-responsive">
+    <div class="tbl-max-height" >
+        <table class="table table-hover tbl-max-height sticky-header">
+            <thead>
+                <tr>
+                    <th>Date time</th>
+                    <th>Full name</th>
+                    <th>Money</th>
+                    <th>Description</th>
+                    <th>Actor</th>
+                    <th>Is Confirmed</th>
+                </tr>
+            </thead>
+            <tbody id="resMealDetail" style="max-height:800px; overflow-y:auto;">
+                @foreach (var it in Model)
+            {
+                    <tr>
+                        <td>@it.datetime</td>
+                        <td>@it.fullname</td>
+                        <td>@it.money</td>
+                        <td>@it.description</td>
+                        <td>@it.actor</td>
+                        @if (@it.status)
+                        {
+                            <td style="color:green">
+                                Confirmed
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="color:firebrick">
+                                Not Confirmed
+                            </td>
+                        }
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    
+</div>

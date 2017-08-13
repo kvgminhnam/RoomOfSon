@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_HomeLayout.cshtml";
+}
+@using RoomOfSon.Models.EF
+@model IEnumerable<tblUser>
+<style>
+    .in-container {
+        width: 50%;
+        height: auto;
+        float: left;
+    }
+    .user-container{
+        width: 100%;
+        min-height: 200px;
+  
+    }
+    .selectpicker{
+        width: 50%;
+        padding: 5px 5px 5px 5px;
+       
+    }
+    
+    
+</style>
+<div class="container" style="height:auto;">
+
+    <div class="in-container" style="padding-right:50px;">
+        <h2 class="title-content">Nộp tiền</h2>
+        <select class="selectpicker" name="selector" >
+            @foreach (var it in Model)
+            {
+                <option value="@it.ID">@it.Fullname</option>
+            }
+
+        </select>
+        <div class="input-group" style="margin-top:20px;">
+            <span class="input-group-addon"><i class="fa fa-dollar" style="font-size:20px; color:red;"></i></span>
+            <input id="ipmoney" type="number" class="form-control" autocomplete="off" name="msg" placeholder="Money money money..." required >
+        </div>
+        <div><img id="loadingimg1" src="~/Content/img/loadinggif.gif" style="display:none; width:40px; height:40px;" /></div>
+        <div id="resPaymentSubmit" style="margin-top:20px;color:crimson; font-size:20px;">
+        </div>
+        
+        <div style="text-align:center"><button id="btn_paysubmit" type="button" class="btn btn-primary btn-md" style="margin-top:20px;">Nộp tiền</button></div>
+
+    </div>
+    <div class="in-container" id="tblInforUser">
+        
+        @Html.Action("tblInforUserPartialView")
+    </div>
+</div>
+   <div class="container">
+       <div class="user-container">
+           <div class="tbl-max-height" id="res-confirm-payment">
+               @Html.Action("ConfirmPartialView")
+           </div>
+               
+               <div class="res-confirm-meal tbl-max-height">
+                   @Html.Action("ConfirmMealPartialView")
+               </div>
+
+           </div>
+   </div>
+
+<script>
+    $("#btn_paysubmit").click(function () {
+        $("#loadingimg1").show();
+        $("#resPaymentSubmit").html("");
+        var temp = $('select[name=selector]').val();
+        var money = $("#ipmoney").val();
+        $.ajax({
+            type: "POST",
+            data: { a: temp, b: money },
+            url: "@Url.Content("PaymentSubmit")",
+            success: function (kq) {
+                $("#loadingimg1").hide();
+                $("#resPaymentSubmit").html(kq);
+                $("#ipmoney").val("");
+                $.ajax({
+                    type: "POST",
+                    data: {},
+                    url: "@Url.Content("ConfirmPartialView")",
+                    success: function (res) {
+                        $("#res-confirm-payment").html(res);
+                        
+                    }
+                });
+            }
+        })
+
+
+    });
+
+     $(".btn_confirmpay").click(function () {
+         var idpm = $(this).val();
+         var pr = $(this).parent();
+         $.ajax({
+             type: "POST",
+             data: { a: idpm },
+             url: "@Url.Content("PaymentConfirm")",
+             success: function (kq) {
+
+                 pr.html("<button class=\"btn btn-success btn-xs\">Confirmed</button>");
+
+                 $.ajax({
+                     type: "POST",
+                     data: {},
+                     url: "@Url.Content("tblInforUserPartialView")",
+                     success: function (res) {
+                         $("#tblInforUser").html(res);
+                     }
+                 });
+             }
+         });
+    });
+
+ 
+
+</script>
+
